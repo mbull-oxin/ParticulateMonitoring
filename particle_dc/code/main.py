@@ -7,7 +7,7 @@
 #    displays PM,temperature and humidity, and an InfluxDB database 
 #    to store timestamp, PM, temperature and humidity. 
 #
-#    Copyright (C) 2022  Shoestring and University of Cambridge
+#    Copyright (C) 2023  Shoestring and University of Cambridge
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU General Public License as published by
