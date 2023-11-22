@@ -65,16 +65,96 @@
           },
           "unit": "conμgm3"
         },
-        "overrides": []
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "mc_1p0 Machine_1"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "PM1.0"
+              },
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "#079299",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "mc_2p5 Machine_1"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "PM2.5"
+              },
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "dark-purple",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "mc_4p0 Machine_1"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "PM4.0"
+              },
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "#bf5e0f",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "mc_10p0 Machine_1"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "PM10.0"
+              },
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "semi-dark-blue",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          }
+        ]
       },
       "gridPos": {
         "h": 6,
-        "w": 6,
+        "w": 18,
         "x": 0,
         "y": 0
       },
       "id": 2,
       "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
         "orientation": "auto",
         "reduceOptions": {
           "calcs": [
@@ -83,9 +163,7 @@
           "fields": "",
           "values": false
         },
-        "showThresholdLabels": true,
-        "showThresholdMarkers": true,
-        "text": {}
+        "textMode": "auto"
       },
       "pluginVersion": "9.4.7",
       "targets": [
@@ -136,114 +214,8 @@
             "uid": "influxdb"
           },
           "hide": false,
-          "query": "",
+          "query": "from(bucket: \"airparticle_monitoring\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"air_particles\")\n  |> filter(fn: (r) => r[\"_field\"] == \"mc_2p5\")\n  |> filter(fn: (r) => r[\"machine\"] == \"${machine}\")\n  |> last()",
           "refId": "B"
-        }
-      ],
-      "title": "PM1.0",
-      "type": "gauge"
-    },
-    {
-      "datasource": {
-        "type": "influxdb",
-        "uid": "influxdb"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "decimals": 2,
-          "mappings": [],
-          "max": 1000,
-          "min": 0,
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "yellow",
-                "value": 250
-              },
-              {
-                "color": "orange",
-                "value": 500
-              },
-              {
-                "color": "red",
-                "value": 750
-              }
-            ]
-          },
-          "unit": "conμgm3"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 6,
-        "w": 6,
-        "x": 6,
-        "y": 0
-      },
-      "id": 10,
-      "options": {
-        "orientation": "auto",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "showThresholdLabels": true,
-        "showThresholdMarkers": true,
-        "text": {}
-      },
-      "pluginVersion": "9.4.7",
-      "targets": [
-        {
-          "datasource": {
-            "type": "influxdb",
-            "uid": "influxdb"
-          },
-          "groupBy": [
-            {
-              "params": [
-                ""
-              ],
-              "type": "time"
-            },
-            {
-              "params": [
-                "null"
-              ],
-              "type": "fill"
-            }
-          ],
-          "measurement": "Machine1",
-          "orderByTime": "ASC",
-          "policy": "default",
-          "query": "from(bucket: \"airparticle_monitoring\")\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r[\"_measurement\"] == \"air_particles\")\r\n  |> filter(fn: (r) => r[\"_field\"] == \"mc_2p5\")\r\n  |> filter(fn: (r) => r[\"machine\"] == \"${machine}\")\r\n  |> last()",
-          "refId": "A",
-          "resultFormat": "time_series",
-          "select": [
-            [
-              {
-                "params": [
-                  "current"
-                ],
-                "type": "field"
-              },
-              {
-                "params": [],
-                "type": "distinct"
-              }
-            ]
-          ],
-          "tags": []
         },
         {
           "datasource": {
@@ -251,114 +223,8 @@
             "uid": "influxdb"
           },
           "hide": false,
-          "query": "",
-          "refId": "B"
-        }
-      ],
-      "title": "PM2.5",
-      "type": "gauge"
-    },
-    {
-      "datasource": {
-        "type": "influxdb",
-        "uid": "influxdb"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "decimals": 2,
-          "mappings": [],
-          "max": 1000,
-          "min": 0,
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "yellow",
-                "value": 250
-              },
-              {
-                "color": "orange",
-                "value": 500
-              },
-              {
-                "color": "red",
-                "value": 750
-              }
-            ]
-          },
-          "unit": "conμgm3"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 6,
-        "w": 6,
-        "x": 12,
-        "y": 0
-      },
-      "id": 11,
-      "options": {
-        "orientation": "auto",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "showThresholdLabels": true,
-        "showThresholdMarkers": true,
-        "text": {}
-      },
-      "pluginVersion": "9.4.7",
-      "targets": [
-        {
-          "datasource": {
-            "type": "influxdb",
-            "uid": "influxdb"
-          },
-          "groupBy": [
-            {
-              "params": [
-                ""
-              ],
-              "type": "time"
-            },
-            {
-              "params": [
-                "null"
-              ],
-              "type": "fill"
-            }
-          ],
-          "measurement": "Machine1",
-          "orderByTime": "ASC",
-          "policy": "default",
-          "query": "from(bucket: \"airparticle_monitoring\")\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r[\"_measurement\"] == \"air_particles\")\r\n  |> filter(fn: (r) => r[\"_field\"] == \"mc_4p0\")\r\n  |> filter(fn: (r) => r[\"machine\"] == \"${machine}\")\r\n  |> last()",
-          "refId": "A",
-          "resultFormat": "time_series",
-          "select": [
-            [
-              {
-                "params": [
-                  "current"
-                ],
-                "type": "field"
-              },
-              {
-                "params": [],
-                "type": "distinct"
-              }
-            ]
-          ],
-          "tags": []
+          "query": "from(bucket: \"airparticle_monitoring\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"air_particles\")\n  |> filter(fn: (r) => r[\"_field\"] == \"mc_4p0\")\n  |> filter(fn: (r) => r[\"machine\"] == \"${machine}\")\n  |> last()",
+          "refId": "C"
         },
         {
           "datasource": {
@@ -366,205 +232,12 @@
             "uid": "influxdb"
           },
           "hide": false,
-          "query": "",
-          "refId": "B"
+          "query": "from(bucket: \"airparticle_monitoring\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"air_particles\")\n  |> filter(fn: (r) => r[\"_field\"] == \"mc_10p0\")\n  |> filter(fn: (r) => r[\"machine\"] == \"${machine}\")\n  |> last()",
+          "refId": "D"
         }
       ],
-      "title": "PM4.0",
-      "type": "gauge"
-    },
-    {
-      "datasource": {
-        "type": "influxdb",
-        "uid": "influxdb"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "decimals": 2,
-          "mappings": [],
-          "max": 1000,
-          "min": 0,
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "yellow",
-                "value": 250
-              },
-              {
-                "color": "orange",
-                "value": 500
-              },
-              {
-                "color": "red",
-                "value": 750
-              }
-            ]
-          },
-          "unit": "conμgm3"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 6,
-        "w": 6,
-        "x": 18,
-        "y": 0
-      },
-      "id": 12,
-      "options": {
-        "orientation": "auto",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "showThresholdLabels": true,
-        "showThresholdMarkers": true,
-        "text": {}
-      },
-      "pluginVersion": "9.4.7",
-      "targets": [
-        {
-          "datasource": {
-            "type": "influxdb",
-            "uid": "influxdb"
-          },
-          "groupBy": [
-            {
-              "params": [
-                ""
-              ],
-              "type": "time"
-            },
-            {
-              "params": [
-                "null"
-              ],
-              "type": "fill"
-            }
-          ],
-          "measurement": "Machine1",
-          "orderByTime": "ASC",
-          "policy": "default",
-          "query": "from(bucket: \"airparticle_monitoring\")\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r[\"_measurement\"] == \"air_particles\")\r\n  |> filter(fn: (r) => r[\"_field\"] == \"mc_10p0\")\r\n  |> filter(fn: (r) => r[\"machine\"] == \"${machine}\")\r\n  |> last()",
-          "refId": "A",
-          "resultFormat": "time_series",
-          "select": [
-            [
-              {
-                "params": [
-                  "current"
-                ],
-                "type": "field"
-              },
-              {
-                "params": [],
-                "type": "distinct"
-              }
-            ]
-          ],
-          "tags": []
-        },
-        {
-          "datasource": {
-            "type": "influxdb",
-            "uid": "influxdb"
-          },
-          "hide": false,
-          "query": "",
-          "refId": "B"
-        }
-      ],
-      "title": "PM10.0",
-      "type": "gauge"
-    },
-    {
-      "datasource": {
-        "type": "influxdb",
-        "uid": "influxdb"
-      },
-      "description": "",
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "decimals": 2,
-          "mappings": [],
-          "max": 90,
-          "min": 0,
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "yellow",
-                "value": 3450
-              },
-              {
-                "color": "orange",
-                "value": 6900
-              },
-              {
-                "color": "red",
-                "value": 10350
-              },
-              {
-                "color": "#EAB839",
-                "value": 13800
-              }
-            ]
-          },
-          "unit": "humidity"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 6,
-        "w": 6,
-        "x": 0,
-        "y": 6
-      },
-      "id": 4,
-      "options": {
-        "orientation": "auto",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "showThresholdLabels": true,
-        "showThresholdMarkers": true,
-        "text": {}
-      },
-      "pluginVersion": "9.4.7",
-      "targets": [
-        {
-          "datasource": {
-            "type": "influxdb",
-            "uid": "influxdb"
-          },
-          "query": "from(bucket: \"airparticle_monitoring\")\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r[\"_measurement\"] == \"air_particles\")\r\n  |> filter(fn: (r) => r[\"_field\"] == \"ambient_rh\")\r\n  |> filter(fn: (r) => r[\"machine\"] == \"${machine}\")\r\n  |> last()",
-          "refId": "A"
-        }
-      ],
-      "title": "Ambient Humidity",
-      "type": "gauge"
+      "title": "Particles",
+      "type": "stat"
     },
     {
       "datasource": {
@@ -611,13 +284,16 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 6,
-        "w": 6,
-        "x": 6,
-        "y": 6
+        "h": 3,
+        "w": 3,
+        "x": 18,
+        "y": 0
       },
       "id": 9,
       "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
         "orientation": "auto",
         "reduceOptions": {
           "calcs": [
@@ -626,9 +302,7 @@
           "fields": "",
           "values": false
         },
-        "showThresholdLabels": true,
-        "showThresholdMarkers": true,
-        "text": {}
+        "textMode": "auto"
       },
       "pluginVersion": "9.4.7",
       "targets": [
@@ -642,7 +316,7 @@
         }
       ],
       "title": "Ambient Temperature",
-      "type": "gauge"
+      "type": "stat"
     },
     {
       "datasource": {
@@ -657,7 +331,7 @@
           },
           "decimals": 2,
           "mappings": [],
-          "max": 500,
+          "max": 90,
           "min": 0,
           "thresholds": {
             "mode": "absolute",
@@ -684,18 +358,21 @@
               }
             ]
           },
-          "unit": "none"
+          "unit": "humidity"
         },
         "overrides": []
       },
       "gridPos": {
-        "h": 6,
-        "w": 6,
-        "x": 12,
-        "y": 6
+        "h": 3,
+        "w": 3,
+        "x": 21,
+        "y": 0
       },
-      "id": 21,
+      "id": 4,
       "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
         "orientation": "auto",
         "reduceOptions": {
           "calcs": [
@@ -704,9 +381,7 @@
           "fields": "",
           "values": false
         },
-        "showThresholdLabels": true,
-        "showThresholdMarkers": true,
-        "text": {}
+        "textMode": "auto"
       },
       "pluginVersion": "9.4.7",
       "targets": [
@@ -715,12 +390,12 @@
             "type": "influxdb",
             "uid": "influxdb"
           },
-          "query": "from(bucket: \"airparticle_monitoring\")\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r[\"_measurement\"] == \"air_particles\")\r\n  |> filter(fn: (r) => r[\"_field\"] == \"voc_index\")\r\n  |> filter(fn: (r) => r[\"machine\"] == \"${machine}\")\r\n  |> last()",
+          "query": "from(bucket: \"airparticle_monitoring\")\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r[\"_measurement\"] == \"air_particles\")\r\n  |> filter(fn: (r) => r[\"_field\"] == \"ambient_rh\")\r\n  |> filter(fn: (r) => r[\"machine\"] == \"${machine}\")\r\n  |> last()",
           "refId": "A"
         }
       ],
-      "title": "VOC Index",
-      "type": "gauge"
+      "title": "Ambient Humidity",
+      "type": "stat"
     },
     {
       "datasource": {
@@ -767,13 +442,16 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 6,
-        "w": 6,
+        "h": 3,
+        "w": 3,
         "x": 18,
-        "y": 6
+        "y": 3
       },
       "id": 22,
       "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
         "orientation": "auto",
         "reduceOptions": {
           "calcs": [
@@ -782,9 +460,7 @@
           "fields": "",
           "values": false
         },
-        "showThresholdLabels": true,
-        "showThresholdMarkers": true,
-        "text": {}
+        "textMode": "auto"
       },
       "pluginVersion": "9.4.7",
       "targets": [
@@ -798,7 +474,86 @@
         }
       ],
       "title": "NOX Index",
-      "type": "gauge"
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "influxdb"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "decimals": 2,
+          "mappings": [],
+          "max": 500,
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "yellow",
+                "value": 3450
+              },
+              {
+                "color": "orange",
+                "value": 6900
+              },
+              {
+                "color": "red",
+                "value": 10350
+              },
+              {
+                "color": "#EAB839",
+                "value": 13800
+              }
+            ]
+          },
+          "unit": "none"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 3,
+        "x": 21,
+        "y": 3
+      },
+      "id": 21,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "9.4.7",
+      "targets": [
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "influxdb"
+          },
+          "query": "from(bucket: \"airparticle_monitoring\")\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r[\"_measurement\"] == \"air_particles\")\r\n  |> filter(fn: (r) => r[\"_field\"] == \"voc_index\")\r\n  |> filter(fn: (r) => r[\"machine\"] == \"${machine}\")\r\n  |> last()",
+          "refId": "A"
+        }
+      ],
+      "title": "VOC Index",
+      "type": "stat"
     },
     {
       "datasource": {
@@ -858,13 +613,90 @@
           },
           "unit": "conμgm3"
         },
-        "overrides": []
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "mc_1p0 Machine_1"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "PM1.0"
+              },
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "#079299",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "mc_2p5 Machine_1"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "PM2.5"
+              },
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "dark-purple",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "mc_4p0 Machine_1"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "PM4.0"
+              },
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "#bf5e0f",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "mc_10p0 Machine_1"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "PM10.0"
+              },
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "semi-dark-blue",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          }
+        ]
       },
       "gridPos": {
-        "h": 8,
-        "w": 11,
+        "h": 10,
+        "w": 24,
         "x": 0,
-        "y": 12
+        "y": 6
       },
       "id": 15,
       "options": {
@@ -895,193 +727,9 @@
             "uid": "influxdb"
           },
           "hide": false,
-          "refId": "B"
-        }
-      ],
-      "title": "PM1.0 History",
-      "type": "timeseries"
-    },
-    {
-      "datasource": {
-        "type": "influxdb",
-        "uid": "influxdb"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "palette-classic"
-          },
-          "custom": {
-            "axisCenteredZero": false,
-            "axisColorMode": "text",
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "barAlignment": 0,
-            "drawStyle": "line",
-            "fillOpacity": 0,
-            "gradientMode": "none",
-            "hideFrom": {
-              "legend": false,
-              "tooltip": false,
-              "viz": false
-            },
-            "lineInterpolation": "linear",
-            "lineWidth": 1,
-            "pointSize": 5,
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "showPoints": "auto",
-            "spanNulls": false,
-            "stacking": {
-              "group": "A",
-              "mode": "none"
-            },
-            "thresholdsStyle": {
-              "mode": "off"
-            }
-          },
-          "mappings": [],
-          "max": 1000,
-          "min": 0,
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          },
-          "unit": "conμgm3"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 8,
-        "w": 11,
-        "x": 11,
-        "y": 12
-      },
-      "id": 16,
-      "options": {
-        "legend": {
-          "calcs": [],
-          "displayMode": "list",
-          "placement": "bottom",
-          "showLegend": true
-        },
-        "tooltip": {
-          "mode": "single",
-          "sort": "none"
-        }
-      },
-      "targets": [
-        {
-          "datasource": {
-            "type": "influxdb",
-            "uid": "influxdb"
-          },
-          "hide": false,
           "query": "from(bucket: \"airparticle_monitoring\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"air_particles\")\n  |> filter(fn: (r) => r[\"_field\"] == \"mc_2p5\")\n  |> filter(fn: (r) => r[\"machine\"] == \"Machine_1\")\n  |> aggregateWindow(every: v.windowPeriod, fn: last, createEmpty: false)\n  |> yield(name: \"last\")",
-          "refId": "A"
-        },
-        {
-          "datasource": {
-            "type": "influxdb",
-            "uid": "influxdb"
-          },
-          "hide": false,
           "refId": "B"
-        }
-      ],
-      "title": "PM2.5 History",
-      "type": "timeseries"
-    },
-    {
-      "datasource": {
-        "type": "influxdb",
-        "uid": "influxdb"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "palette-classic"
-          },
-          "custom": {
-            "axisCenteredZero": false,
-            "axisColorMode": "text",
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "barAlignment": 0,
-            "drawStyle": "line",
-            "fillOpacity": 0,
-            "gradientMode": "none",
-            "hideFrom": {
-              "legend": false,
-              "tooltip": false,
-              "viz": false
-            },
-            "lineInterpolation": "linear",
-            "lineWidth": 1,
-            "pointSize": 5,
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "showPoints": "auto",
-            "spanNulls": false,
-            "stacking": {
-              "group": "A",
-              "mode": "none"
-            },
-            "thresholdsStyle": {
-              "mode": "off"
-            }
-          },
-          "mappings": [],
-          "max": 1000,
-          "min": 0,
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          },
-          "unit": "conμgm3"
         },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 8,
-        "w": 11,
-        "x": 0,
-        "y": 20
-      },
-      "id": 17,
-      "options": {
-        "legend": {
-          "calcs": [],
-          "displayMode": "list",
-          "placement": "bottom",
-          "showLegend": true
-        },
-        "tooltip": {
-          "mode": "single",
-          "sort": "none"
-        }
-      },
-      "targets": [
         {
           "datasource": {
             "type": "influxdb",
@@ -1089,100 +737,8 @@
           },
           "hide": false,
           "query": "from(bucket: \"airparticle_monitoring\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"air_particles\")\n  |> filter(fn: (r) => r[\"_field\"] == \"mc_4p0\")\n  |> filter(fn: (r) => r[\"machine\"] == \"Machine_1\")\n  |> aggregateWindow(every: v.windowPeriod, fn: last, createEmpty: false)\n  |> yield(name: \"last\")",
-          "refId": "A"
+          "refId": "C"
         },
-        {
-          "datasource": {
-            "type": "influxdb",
-            "uid": "influxdb"
-          },
-          "hide": false,
-          "refId": "B"
-        }
-      ],
-      "title": "PM4.0 History",
-      "type": "timeseries"
-    },
-    {
-      "datasource": {
-        "type": "influxdb",
-        "uid": "influxdb"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "palette-classic"
-          },
-          "custom": {
-            "axisCenteredZero": false,
-            "axisColorMode": "text",
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "barAlignment": 0,
-            "drawStyle": "line",
-            "fillOpacity": 0,
-            "gradientMode": "none",
-            "hideFrom": {
-              "legend": false,
-              "tooltip": false,
-              "viz": false
-            },
-            "lineInterpolation": "linear",
-            "lineWidth": 1,
-            "pointSize": 5,
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "showPoints": "auto",
-            "spanNulls": false,
-            "stacking": {
-              "group": "A",
-              "mode": "none"
-            },
-            "thresholdsStyle": {
-              "mode": "off"
-            }
-          },
-          "mappings": [],
-          "max": 1000,
-          "min": 0,
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          },
-          "unit": "conμgm3"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 8,
-        "w": 11,
-        "x": 11,
-        "y": 20
-      },
-      "id": 18,
-      "options": {
-        "legend": {
-          "calcs": [],
-          "displayMode": "list",
-          "placement": "bottom",
-          "showLegend": true
-        },
-        "tooltip": {
-          "mode": "single",
-          "sort": "none"
-        }
-      },
-      "targets": [
         {
           "datasource": {
             "type": "influxdb",
@@ -1190,119 +746,10 @@
           },
           "hide": false,
           "query": "from(bucket: \"airparticle_monitoring\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"air_particles\")\n  |> filter(fn: (r) => r[\"_field\"] == \"mc_10p0\")\n  |> filter(fn: (r) => r[\"machine\"] == \"Machine_1\")\n  |> aggregateWindow(every: v.windowPeriod, fn: last, createEmpty: false)\n  |> yield(name: \"last\")",
-          "refId": "A"
-        },
-        {
-          "datasource": {
-            "type": "influxdb",
-            "uid": "influxdb"
-          },
-          "hide": false,
-          "refId": "B"
+          "refId": "D"
         }
       ],
-      "title": "PM10.0 History",
-      "type": "timeseries"
-    },
-    {
-      "datasource": {
-        "type": "influxdb",
-        "uid": "influxdb"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "palette-classic"
-          },
-          "custom": {
-            "axisCenteredZero": false,
-            "axisColorMode": "text",
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "barAlignment": 0,
-            "drawStyle": "line",
-            "fillOpacity": 0,
-            "gradientMode": "none",
-            "hideFrom": {
-              "legend": false,
-              "tooltip": false,
-              "viz": false
-            },
-            "lineInterpolation": "linear",
-            "lineWidth": 1,
-            "pointSize": 5,
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "showPoints": "auto",
-            "spanNulls": false,
-            "stacking": {
-              "group": "A",
-              "mode": "none"
-            },
-            "thresholdsStyle": {
-              "mode": "off"
-            }
-          },
-          "mappings": [],
-          "max": 90,
-          "min": 0,
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          },
-          "unit": "humidity"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 8,
-        "w": 11,
-        "x": 0,
-        "y": 28
-      },
-      "id": 19,
-      "options": {
-        "legend": {
-          "calcs": [],
-          "displayMode": "list",
-          "placement": "bottom",
-          "showLegend": true
-        },
-        "tooltip": {
-          "mode": "single",
-          "sort": "none"
-        }
-      },
-      "targets": [
-        {
-          "datasource": {
-            "type": "influxdb",
-            "uid": "influxdb"
-          },
-          "hide": false,
-          "query": "from(bucket: \"airparticle_monitoring\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"air_particles\")\n  |> filter(fn: (r) => r[\"_field\"] == \"ambient_rh\")\n  |> filter(fn: (r) => r[\"machine\"] == \"Machine_1\")\n  |> aggregateWindow(every: v.windowPeriod, fn: last, createEmpty: false)\n  |> yield(name: \"last\")",
-          "refId": "A"
-        },
-        {
-          "datasource": {
-            "type": "influxdb",
-            "uid": "influxdb"
-          },
-          "hide": false,
-          "refId": "B"
-        }
-      ],
-      "title": "Humidity History",
+      "title": "Particles History",
       "type": "timeseries"
     },
     {
@@ -1367,9 +814,9 @@
       },
       "gridPos": {
         "h": 8,
-        "w": 11,
-        "x": 11,
-        "y": 28
+        "w": 8,
+        "x": 0,
+        "y": 16
       },
       "id": 20,
       "options": {
@@ -1447,7 +894,7 @@
             }
           },
           "mappings": [],
-          "max": 500,
+          "max": 90,
           "min": 0,
           "thresholds": {
             "mode": "absolute",
@@ -1455,20 +902,24 @@
               {
                 "color": "green",
                 "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
               }
             ]
           },
-          "unit": "none"
+          "unit": "humidity"
         },
         "overrides": []
       },
       "gridPos": {
         "h": 8,
-        "w": 11,
-        "x": 0,
-        "y": 36
+        "w": 8,
+        "x": 8,
+        "y": 16
       },
-      "id": 23,
+      "id": 19,
       "options": {
         "legend": {
           "calcs": [],
@@ -1488,7 +939,7 @@
             "uid": "influxdb"
           },
           "hide": false,
-          "query": "from(bucket: \"airparticle_monitoring\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"air_particles\")\n  |> filter(fn: (r) => r[\"_field\"] == \"voc_index\")\n  |> filter(fn: (r) => r[\"machine\"] == \"Machine_1\")\n  |> aggregateWindow(every: v.windowPeriod, fn: last, createEmpty: false)\n  |> yield(name: \"last\")",
+          "query": "from(bucket: \"airparticle_monitoring\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"air_particles\")\n  |> filter(fn: (r) => r[\"_field\"] == \"ambient_rh\")\n  |> filter(fn: (r) => r[\"machine\"] == \"Machine_1\")\n  |> aggregateWindow(every: v.windowPeriod, fn: last, createEmpty: false)\n  |> yield(name: \"last\")",
           "refId": "A"
         },
         {
@@ -1500,7 +951,7 @@
           "refId": "B"
         }
       ],
-      "title": "VOC Index History",
+      "title": "Humidity History",
       "type": "timeseries"
     },
     {
@@ -1508,6 +959,7 @@
         "type": "influxdb",
         "uid": "influxdb"
       },
+      "description": "",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -1561,11 +1013,11 @@
       },
       "gridPos": {
         "h": 8,
-        "w": 11,
-        "x": 11,
-        "y": 36
+        "w": 8,
+        "x": 16,
+        "y": 16
       },
-      "id": 24,
+      "id": 23,
       "options": {
         "legend": {
           "calcs": [],
@@ -1585,7 +1037,7 @@
             "uid": "influxdb"
           },
           "hide": false,
-          "query": "from(bucket: \"airparticle_monitoring\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"air_particles\")\n  |> filter(fn: (r) => r[\"_field\"] == \"nox_index\")\n  |> filter(fn: (r) => r[\"machine\"] == \"Machine_1\")\n  |> aggregateWindow(every: v.windowPeriod, fn: last, createEmpty: false)\n  |> yield(name: \"last\")",
+          "query": "from(bucket: \"airparticle_monitoring\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"air_particles\")\n  |> filter(fn: (r) => r[\"_field\"] == \"voc_index\")\n  |> filter(fn: (r) => r[\"machine\"] == \"Machine_1\")\n  |> aggregateWindow(every: v.windowPeriod, fn: last, createEmpty: false)\n  |> yield(name: \"last\")",
           "refId": "A"
         },
         {
@@ -1594,10 +1046,11 @@
             "uid": "influxdb"
           },
           "hide": false,
+          "query": "from(bucket: \"airparticle_monitoring\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"air_particles\")\n  |> filter(fn: (r) => r[\"_field\"] == \"nox_index\")\n  |> filter(fn: (r) => r[\"machine\"] == \"Machine_1\")\n  |> aggregateWindow(every: v.windowPeriod, fn: last, createEmpty: false)\n  |> yield(name: \"last\")",
           "refId": "B"
         }
       ],
-      "title": "Nox Index History",
+      "title": "VOC and NOX Index History",
       "type": "timeseries"
     },
     {
@@ -1610,7 +1063,7 @@
         "h": 2,
         "w": 22,
         "x": 0,
-        "y": 44
+        "y": 24
       },
       "id": 8,
       "links": [],
@@ -1637,7 +1090,7 @@
     "list": [
       {
         "current": {
-          "selected": true,
+          "selected": false,
           "text": "Machine_1",
           "value": "Machine_1"
         },
@@ -1668,6 +1121,6 @@
   "timezone": "",
   "title": "Air Particle Dashboard",
   "uid": "q39y6tRgk1",
-  "version": 2,
+  "version": 13,
   "weekStart": ""
 }
