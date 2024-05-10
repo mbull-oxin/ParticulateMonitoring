@@ -69,7 +69,7 @@
           {
             "matcher": {
               "id": "byName",
-              "options": "mc_1p0 Machine_1"
+              "options": "_value mc_1p0"
             },
             "properties": [
               {
@@ -88,7 +88,7 @@
           {
             "matcher": {
               "id": "byName",
-              "options": "mc_2p5 Machine_1"
+              "options": "_value mc_2p5"
             },
             "properties": [
               {
@@ -107,7 +107,7 @@
           {
             "matcher": {
               "id": "byName",
-              "options": "mc_4p0 Machine_1"
+              "options": "_value mc_4p0"
             },
             "properties": [
               {
@@ -126,7 +126,7 @@
           {
             "matcher": {
               "id": "byName",
-              "options": "mc_10p0 Machine_1"
+              "options": "_value mc_10p0"
             },
             "properties": [
               {
@@ -189,7 +189,7 @@
           "measurement": "Machine1",
           "orderByTime": "ASC",
           "policy": "default",
-          "query": "from(bucket: \"airparticle_monitoring\")\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r[\"_measurement\"] == \"air_particles\")\r\n  |> filter(fn: (r) => r[\"_field\"] == \"mc_1p0\")\r\n  |> filter(fn: (r) => r[\"machine\"] == \"${machine}\")\r\n  |> last()",
+          "query": "from(bucket: \"airparticle_monitoring\")\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r[\"_measurement\"] == \"air_particles\")\r\n  |> filter(fn: (r) => r[\"_field\"] == \"mc_1p0\" or  r[\"_field\"] == \"mc_2p5\" or  r[\"_field\"] == \"mc_4p0\" or  r[\"_field\"] == \"mc_10p0\")\r\n  |> filter(fn: (r) => r[\"machine\"] == \"${machine}\")\r\n  |> last()\r\n  |> keep(columns: [\"_field\",\"_value\"])",
           "refId": "A",
           "resultFormat": "time_series",
           "select": [
@@ -207,33 +207,6 @@
             ]
           ],
           "tags": []
-        },
-        {
-          "datasource": {
-            "type": "influxdb",
-            "uid": "influxdb"
-          },
-          "hide": false,
-          "query": "from(bucket: \"airparticle_monitoring\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"air_particles\")\n  |> filter(fn: (r) => r[\"_field\"] == \"mc_2p5\")\n  |> filter(fn: (r) => r[\"machine\"] == \"${machine}\")\n  |> last()",
-          "refId": "B"
-        },
-        {
-          "datasource": {
-            "type": "influxdb",
-            "uid": "influxdb"
-          },
-          "hide": false,
-          "query": "from(bucket: \"airparticle_monitoring\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"air_particles\")\n  |> filter(fn: (r) => r[\"_field\"] == \"mc_4p0\")\n  |> filter(fn: (r) => r[\"machine\"] == \"${machine}\")\n  |> last()",
-          "refId": "C"
-        },
-        {
-          "datasource": {
-            "type": "influxdb",
-            "uid": "influxdb"
-          },
-          "hide": false,
-          "query": "from(bucket: \"airparticle_monitoring\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"air_particles\")\n  |> filter(fn: (r) => r[\"_field\"] == \"mc_10p0\")\n  |> filter(fn: (r) => r[\"machine\"] == \"${machine}\")\n  |> last()",
-          "refId": "D"
         }
       ],
       "title": "Particles",
@@ -596,7 +569,6 @@
             }
           },
           "mappings": [],
-          "max": 1000,
           "min": 0,
           "thresholds": {
             "mode": "absolute",
@@ -617,7 +589,7 @@
           {
             "matcher": {
               "id": "byName",
-              "options": "mc_1p0 Machine_1"
+              "options": "mc_1p0"
             },
             "properties": [
               {
@@ -636,7 +608,7 @@
           {
             "matcher": {
               "id": "byName",
-              "options": "mc_2p5 Machine_1"
+              "options": "mc_2p5"
             },
             "properties": [
               {
@@ -655,7 +627,7 @@
           {
             "matcher": {
               "id": "byName",
-              "options": "mc_4p0 Machine_1"
+              "options": "mc_4p0"
             },
             "properties": [
               {
@@ -674,7 +646,7 @@
           {
             "matcher": {
               "id": "byName",
-              "options": "mc_10p0 Machine_1"
+              "options": "mc_10p0"
             },
             "properties": [
               {
@@ -718,35 +690,8 @@
             "uid": "influxdb"
           },
           "hide": false,
-          "query": "from(bucket: \"airparticle_monitoring\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"air_particles\")\n  |> filter(fn: (r) => r[\"_field\"] == \"mc_1p0\")\n  |> filter(fn: (r) => r[\"machine\"] == \"Machine_1\")\n  |> aggregateWindow(every: v.windowPeriod, fn: last, createEmpty: false)\n  |> yield(name: \"last\")",
+          "query": "from(bucket: \"airparticle_monitoring\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"air_particles\")\n  |> filter(fn: (r) => r[\"_field\"] == \"mc_1p0\" or  r[\"_field\"] == \"mc_2p5\" or  r[\"_field\"] == \"mc_4p0\" or  r[\"_field\"] == \"mc_10p0\")\n  |> filter(fn: (r) => r[\"machine\"] == \"${machine}\")\n  |> aggregateWindow(every: v.windowPeriod, fn: last, createEmpty: false)\n  |> keep(columns: [\"_field\",\"_value\",\"_time\"])",
           "refId": "A"
-        },
-        {
-          "datasource": {
-            "type": "influxdb",
-            "uid": "influxdb"
-          },
-          "hide": false,
-          "query": "from(bucket: \"airparticle_monitoring\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"air_particles\")\n  |> filter(fn: (r) => r[\"_field\"] == \"mc_2p5\")\n  |> filter(fn: (r) => r[\"machine\"] == \"Machine_1\")\n  |> aggregateWindow(every: v.windowPeriod, fn: last, createEmpty: false)\n  |> yield(name: \"last\")",
-          "refId": "B"
-        },
-        {
-          "datasource": {
-            "type": "influxdb",
-            "uid": "influxdb"
-          },
-          "hide": false,
-          "query": "from(bucket: \"airparticle_monitoring\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"air_particles\")\n  |> filter(fn: (r) => r[\"_field\"] == \"mc_4p0\")\n  |> filter(fn: (r) => r[\"machine\"] == \"Machine_1\")\n  |> aggregateWindow(every: v.windowPeriod, fn: last, createEmpty: false)\n  |> yield(name: \"last\")",
-          "refId": "C"
-        },
-        {
-          "datasource": {
-            "type": "influxdb",
-            "uid": "influxdb"
-          },
-          "hide": false,
-          "query": "from(bucket: \"airparticle_monitoring\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"air_particles\")\n  |> filter(fn: (r) => r[\"_field\"] == \"mc_10p0\")\n  |> filter(fn: (r) => r[\"machine\"] == \"Machine_1\")\n  |> aggregateWindow(every: v.windowPeriod, fn: last, createEmpty: false)\n  |> yield(name: \"last\")",
-          "refId": "D"
         }
       ],
       "title": "Particles History",
@@ -838,19 +783,23 @@
             "uid": "influxdb"
           },
           "hide": false,
-          "query": "from(bucket: \"airparticle_monitoring\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"air_particles\")\n  |> filter(fn: (r) => r[\"_field\"] == \"ambient_t\")\n  |> filter(fn: (r) => r[\"machine\"] == \"Machine_1\")\n  |> aggregateWindow(every: v.windowPeriod, fn: last, createEmpty: false)\n  |> yield(name: \"last\")",
+          "query": "from(bucket: \"airparticle_monitoring\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"air_particles\")\n  |> filter(fn: (r) => r[\"_field\"] == \"ambient_t\")\n  |> filter(fn: (r) => r[\"machine\"] == \"${machine}\")\n  |> aggregateWindow(every: v.windowPeriod, fn: last, createEmpty: false)\n  |> yield(name: \"last\")",
           "refId": "A"
-        },
-        {
-          "datasource": {
-            "type": "influxdb",
-            "uid": "influxdb"
-          },
-          "hide": false,
-          "refId": "B"
         }
       ],
       "title": "Ambient Temperature History",
+      "transformations": [
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {},
+            "indexByName": {},
+            "renameByName": {
+              "ambient_t Machine_1": "Ambient Temperature"
+            }
+          }
+        }
+      ],
       "type": "timeseries"
     },
     {
@@ -939,19 +888,23 @@
             "uid": "influxdb"
           },
           "hide": false,
-          "query": "from(bucket: \"airparticle_monitoring\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"air_particles\")\n  |> filter(fn: (r) => r[\"_field\"] == \"ambient_rh\")\n  |> filter(fn: (r) => r[\"machine\"] == \"Machine_1\")\n  |> aggregateWindow(every: v.windowPeriod, fn: last, createEmpty: false)\n  |> yield(name: \"last\")",
+          "query": "from(bucket: \"airparticle_monitoring\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"air_particles\")\n  |> filter(fn: (r) => r[\"_field\"] == \"ambient_rh\")\n  |> filter(fn: (r) => r[\"machine\"] == \"${machine}\")\n  |> aggregateWindow(every: v.windowPeriod, fn: last, createEmpty: false)\n  |> yield(name: \"last\")",
           "refId": "A"
-        },
-        {
-          "datasource": {
-            "type": "influxdb",
-            "uid": "influxdb"
-          },
-          "hide": false,
-          "refId": "B"
         }
       ],
       "title": "Humidity History",
+      "transformations": [
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {},
+            "indexByName": {},
+            "renameByName": {
+              "ambient_rh Machine_1": "Ambient Relative Humidity"
+            }
+          }
+        }
+      ],
       "type": "timeseries"
     },
     {
@@ -1009,7 +962,32 @@
           },
           "unit": "none"
         },
-        "overrides": []
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "nox_index"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "NOX Index"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "voc_index"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "VOC Index"
+              }
+            ]
+          }
+        ]
       },
       "gridPos": {
         "h": 8,
@@ -1037,20 +1015,12 @@
             "uid": "influxdb"
           },
           "hide": false,
-          "query": "from(bucket: \"airparticle_monitoring\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"air_particles\")\n  |> filter(fn: (r) => r[\"_field\"] == \"voc_index\")\n  |> filter(fn: (r) => r[\"machine\"] == \"Machine_1\")\n  |> aggregateWindow(every: v.windowPeriod, fn: last, createEmpty: false)\n  |> yield(name: \"last\")",
+          "query": "from(bucket: \"airparticle_monitoring\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"air_particles\")\n  |> filter(fn: (r) => r[\"_field\"] == \"voc_index\" or r[\"_field\"] == \"nox_index\")\n  |> filter(fn: (r) => r[\"machine\"] == \"${machine}\")\n  |> aggregateWindow(every: v.windowPeriod, fn: last, createEmpty: false)\n  |> keep(columns: [\"_field\",\"_value\",\"_time\"])\n  ",
           "refId": "A"
-        },
-        {
-          "datasource": {
-            "type": "influxdb",
-            "uid": "influxdb"
-          },
-          "hide": false,
-          "query": "from(bucket: \"airparticle_monitoring\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"air_particles\")\n  |> filter(fn: (r) => r[\"_field\"] == \"nox_index\")\n  |> filter(fn: (r) => r[\"machine\"] == \"Machine_1\")\n  |> aggregateWindow(every: v.windowPeriod, fn: last, createEmpty: false)\n  |> yield(name: \"last\")",
-          "refId": "B"
         }
       ],
       "title": "VOC and NOX Index History",
+      "transformations": [],
       "type": "timeseries"
     },
     {
@@ -1121,6 +1091,6 @@
   "timezone": "",
   "title": "Air Particle Dashboard",
   "uid": "q39y6tRgk1",
-  "version": 13,
+  "version": 5,
   "weekStart": ""
 }
