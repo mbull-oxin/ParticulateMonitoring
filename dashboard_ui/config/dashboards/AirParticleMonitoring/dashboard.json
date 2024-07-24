@@ -381,7 +381,7 @@
           "color": {
             "mode": "thresholds"
           },
-          "decimals": 2,
+          "decimals": 0,
           "mappings": [],
           "max": 500,
           "min": 0,
@@ -460,7 +460,7 @@
           "color": {
             "mode": "thresholds"
           },
-          "decimals": 2,
+          "decimals": 0,
           "mappings": [],
           "max": 500,
           "min": 0,
@@ -1060,7 +1060,7 @@
     "list": [
       {
         "current": {
-          "selected": false,
+          "selected": true,
           "text": "Machine_1",
           "value": "Machine_1"
         },
@@ -1084,13 +1084,13 @@
     ]
   },
   "time": {
-    "from": "now-30m",
+    "from": "now-5m",
     "to": "now"
   },
   "timepicker": {},
   "timezone": "",
   "title": "Air Particle Dashboard",
   "uid": "q39y6tRgk1",
-  "version": 1,
+  "version": 2,
   "weekStart": ""
 }
