@@ -1084,13 +1084,13 @@
     ]
   },
   "time": {
-    "from": "now-5m",
+    "from": "now-30m",
     "to": "now"
   },
   "timepicker": {},
   "timezone": "",
   "title": "Air Particle Dashboard",
   "uid": "q39y6tRgk1",
-  "version": 5,
+  "version": 1,
   "weekStart": ""
 }
