@@ -47,5 +47,5 @@ class AirParticleMonitoringCalculation:
         voc_index = ADCsamples.voc_index.scaled
         nox_index = ADCsamples.nox_index.scaled
 
-        return {"mc_1p0": str(mc_1p0), "mc_2p5": str(mc_2p5), "mc_4p0": str(mc_4p0),"mc_10p0": str(mc_10p0), "ambient_rh": str(ambient_rh),
-        "ambient_t": str(ambient_t), "voc_index": str(voc_index), "nox_index": str(nox_index)}
+        return {"mc_1p0": mc_1p0, "mc_2p5": mc_2p5, "mc_4p0": mc_4p0,"mc_10p0": mc_10p0, "ambient_rh": ambient_rh,
+        "ambient_t": ambient_t, "voc_index": voc_index, "nox_index": nox_index}
