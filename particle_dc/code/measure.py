@@ -36,8 +36,6 @@ import time
 import importlib
 import zmq
 
-import calculate as calc
-
 logger = logging.getLogger("main.measure")
 context = zmq.Context()
 
@@ -88,8 +86,6 @@ class AirParticleMeasureBuildingBlock(multiprocessing.Process):
 
         adc = adc_module.ADC(self.config)
 
-        calculation = calc.AirParticleMonitoringCalculation(self.config)
-
         sleep_time = period
         t = time.time()
         while run:
@@ -118,10 +114,18 @@ class AirParticleMeasureBuildingBlock(multiprocessing.Process):
             timestamp = datetime.datetime.now(tz=tz).isoformat()
 
             # convert
-            results = calculation.calculate(sample)
-            payload = {**results, **self.constants, "timestamp": timestamp}
-
+            results =  {"mc_1p0": sample.mass_concentration_1p0.physical,
+                        "mc_2p5": sample.mass_concentration_2p5.physical,
+                        "mc_4p0": sample.mass_concentration_4p0.physical,
+                        "mc_10p0": sample.mass_concentration_10p0.physical,
+                        "ambient_rh": sample.ambient_humidity.percent_rh,
+                        "ambient_t": sample.ambient_temperature.degrees_celsius,
+                        "voc_index": sample.voc_index.scaled,
+                        "nox_index": sample.nox_index.scaled,
+                       }
+            
             # send
+            payload = {**results, **self.constants, "timestamp": timestamp}
             output = {"path": "", "payload": payload}
             self.dispatch(output)
 
