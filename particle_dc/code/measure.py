@@ -52,7 +52,6 @@ class AirParticleMeasureBuildingBlock(multiprocessing.Process):
         self.zmq_out = None
 
         self.collection_interval = config['sampling']['sample_interval']
-        self.sample_count = config['sampling']['sample_count']
         self.adc_module = config['adc']['adc_module']
 
     def do_connect(self):

@@ -2,15 +2,11 @@
     machine="Machine_1"	#Name of the machine being monitored (can't have spaces)
 
 [adc]
-    # uncomment the adc that you are using (default is BCRobotics)
+    # uncomment the adc that you are using
     adc_module = "sen5x"
 
 [sampling]
-    sample_count = 5
-    sample_interval = 0.2
-
-[calculation]
-    
+    sample_interval = 1
 
 [computing]
 	hardware="Pi4"
