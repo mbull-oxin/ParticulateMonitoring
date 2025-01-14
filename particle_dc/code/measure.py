@@ -90,13 +90,13 @@ class AirParticleMeasureBuildingBlock(multiprocessing.Process):
         while run:
             t += period
 
-            # Collect samples from ADC
+            # Collect sample from ADC
+            sample = None
             try:
                 sample = adc.sample()
-             #   sample_accumulator += sample
-              #  num_samples+=1
             except Exception as e:
                 logger.error(f"Sampling lead to exception{e} \\")
+                raise e
 
             # handle timestamps and timezones
             if time.time() > next_check:
