@@ -1022,33 +1022,6 @@
       "title": "VOC and NOX Index History",
       "transformations": [],
       "type": "timeseries"
-    },
-    {
-      "datasource": {
-        "type": "influxdb",
-        "uid": "influxdb"
-      },
-      "description": "",
-      "gridPos": {
-        "h": 2,
-        "w": 22,
-        "x": 0,
-        "y": 24
-      },
-      "id": 8,
-      "links": [],
-      "options": {
-        "code": {
-          "language": "html",
-          "showLineNumbers": false,
-          "showMiniMap": false
-        },
-        "content": "   Air Particle Monitoring from Shoestring and the University of Cambridge as part of SMDH (more information at <a href=\"https://www.digitalshoestring.net\">digitalshoestring.net</a>)\r\n",
-        "mode": "html"
-      },
-      "pluginVersion": "9.4.7",
-      "transparent": true,
-      "type": "text"
     }
   ],
   "refresh": "5s",
@@ -1091,6 +1064,6 @@
   "timezone": "",
   "title": "Air Particle Dashboard",
   "uid": "q39y6tRgk1",
-  "version": 3,
+  "version": 4,
   "weekStart": ""
 }
