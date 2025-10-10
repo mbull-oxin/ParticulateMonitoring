@@ -5,7 +5,7 @@ recipe_vsn = "1.0.0"
 [solution]
     name = "Air Particle Monitoring"
     slug = "air_particle_monitoring"
-    version = "2.0.0"
+    version = "2.0.1"
     description = "Shoestring Air Particle Monitoring Starter Solution"
 
 # Service module instances present in this solution
