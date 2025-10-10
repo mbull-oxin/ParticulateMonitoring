@@ -7,3 +7,4 @@ bcr-libraries
 spidev
 rpi.gpio
 sensirion-i2c-sen5x
+pyserial

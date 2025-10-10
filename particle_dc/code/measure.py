@@ -54,6 +54,8 @@ class AirParticleMeasureBuildingBlock(multiprocessing.Process):
         self.collection_interval = config['sampling']['sample_interval']
         self.adc_module = config['adc']['adc_module']
 
+        self.addon_module=config['adc'].get('addon_module')
+
     def do_connect(self):
         self.zmq_out = context.socket(self.zmq_conf['type'])
         if self.zmq_conf["bind"]:
@@ -84,6 +86,19 @@ class AirParticleMeasureBuildingBlock(multiprocessing.Process):
             return
 
         adc = adc_module.ADC(self.config)
+
+        if self.addon_module:
+            # get correct addon module
+            try:
+                add_module = importlib.import_module(f"sensor.{self.addon_module}")
+                logger.debug(f"Imported {self.addon_module}")
+            except ModuleNotFoundError as e:
+                logger.error(f"Unable to import module {self.addon_module}. Stopping!!")
+                return
+
+            addon = add_module.Sensor(self.config)
+        else:
+            addon=None
 
         sleep_time = period
         t = time.time()
@@ -123,6 +138,10 @@ class AirParticleMeasureBuildingBlock(multiprocessing.Process):
                         "nox_index": sample.nox_index.scaled,
                        }
             
+            # get the addon data if it exists....
+            if addon:
+                results.extend(addon.sample)
+
             # send
             payload = {**results, **self.constants, "timestamp": timestamp}
             output = {"path": "", "payload": payload}

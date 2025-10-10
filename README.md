@@ -14,3 +14,8 @@
 ### Usage
 - View the dashboard: navigate to `localhost:3000` in a web browser
 ![image](https://github.com/user-attachments/assets/3dadfb51-528b-4f49-a816-dc73d2670d06)
+
+### Documentation
+- documentation for gravity HCHO Sensor
+https://wiki.dfrobot.com/Gravity__HCHO_Sensor_SKU__SEN0231#More
+
