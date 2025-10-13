@@ -1,0 +1,6 @@
+# select a config file appropriate for your hardware and wiring setup
+module_config_file = "./module_config/{{module_config_file}}"
+
+
+#   Set the machine name
+calculation.machine_name.config.machine = "{{machine_name}}"

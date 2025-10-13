@@ -1,0 +1,67 @@
+#=-= Define Interface Modules =-=
+[interface.i2c0]
+    module="i2c"
+    class="I2C"
+[interface.i2c0.config]
+    bus=1
+
+
+#=-= Define Device Modules =-=
+[device.air_particle_sensor]
+    module="gas_sen55"                     # device_modules / file name
+    class="SEN55"
+    interface="i2c0"
+[device.air_particle_sensor.variables]      # This section is required by schema.
+    PM1_var = "mc_1p0"                       # Although there are many values here and they are the same as the defaults,
+    PM2.5_var = "mc_2p5"                     # explicitly showing them makes clear the connection with [output.overall.message_spec]
+    PM4_var = "mc_4p0"
+    PM10_var = "mc_10p0"
+    voc_var = "voc_index"
+    nox_var = "nox_index"
+    temperature_var = "ambient_t"
+    relative_humidity_var = "ambient_rh"
+
+
+#=-= Define Calculation Modules =-=
+[calculation.machine_name]
+    module="gen_constants"
+    class="ConstantSet"
+[calculation.machine_name.config]
+    machine = "overwritten_by_user_config"
+[calculation.machine_name.variables]       # although empty, this section is required by schema
+
+
+#=-= Define Calculation Pipelines =-=
+[pipelines]
+    pipeline = ["machine_name"]
+
+
+#=-= Define Measurements Pipelines =-=
+[measurement]
+    module="gen_sample"
+    class="SingleSample"
+[measurement.config]
+    period = 2.0 # seconds. SEN55 makes data available every second. Allow some margin or it will throw a lot of "data not ready" errors.
+[[measurement.sensing_stacks]]
+    device = "air_particle_sensor"
+    pipeline = "pipeline"
+
+
+#=-= Define Output Specification =-=
+[output.overall]
+    topic = "air_particle_monitoring/{{machine}}"
+[output.overall.message_spec]
+    timestamp = '$.timestamp'
+    mc_1p0 = "$.mc_1p0"
+    mc_2p5 = "$.mc_2p5"
+    mc_4p0 = "$.mc_4p0"
+    mc_10p0 = "$.mc_10p0"
+    voc_index = "$.voc_index"
+    nox_index = "$.nox_index"
+    ambient_t = "$.ambient_t"
+    ambient_rh = "$.ambient_rh"
+    machine = "$.machine"
+
+[mqtt]
+    broker = "mqtt.docker.local"
+    port = 1883   # common mqtt ports are 1883 and 8883

@@ -156,6 +156,7 @@
         "graphMode": "none",
         "justifyMode": "auto",
         "orientation": "auto",
+        "percentChangeColorMode": "standard",
         "reduceOptions": {
           "calcs": [
             "lastNotNull"
@@ -163,9 +164,11 @@
           "fields": "",
           "values": false
         },
-        "textMode": "auto"
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
       },
-      "pluginVersion": "9.4.7",
+      "pluginVersion": "11.1.3",
       "targets": [
         {
           "datasource": {
@@ -189,7 +192,7 @@
           "measurement": "Machine1",
           "orderByTime": "ASC",
           "policy": "default",
-          "query": "from(bucket: \"airparticle_monitoring\")\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r[\"_measurement\"] == \"air_particles\")\r\n  |> filter(fn: (r) => r[\"_field\"] == \"mc_1p0\" or  r[\"_field\"] == \"mc_2p5\" or  r[\"_field\"] == \"mc_4p0\" or  r[\"_field\"] == \"mc_10p0\")\r\n  |> filter(fn: (r) => r[\"machine\"] == \"${machine}\")\r\n  |> last()\r\n  |> keep(columns: [\"_field\",\"_value\"])",
+          "query": "from(bucket: \"${bucket}\")\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r[\"_measurement\"] == \"air_particles\")\r\n  |> filter(fn: (r) => r[\"_field\"] == \"mc_1p0\" or  r[\"_field\"] == \"mc_2p5\" or  r[\"_field\"] == \"mc_4p0\" or  r[\"_field\"] == \"mc_10p0\")\r\n  |> filter(fn: (r) => r[\"machine\"] == \"${machine}\")\r\n  |> last()\r\n  |> keep(columns: [\"_field\",\"_value\"])",
           "refId": "A",
           "resultFormat": "time_series",
           "select": [
@@ -268,6 +271,7 @@
         "graphMode": "none",
         "justifyMode": "auto",
         "orientation": "auto",
+        "percentChangeColorMode": "standard",
         "reduceOptions": {
           "calcs": [
             "lastNotNull"
@@ -275,16 +279,18 @@
           "fields": "",
           "values": false
         },
-        "textMode": "auto"
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
       },
-      "pluginVersion": "9.4.7",
+      "pluginVersion": "11.1.3",
       "targets": [
         {
           "datasource": {
             "type": "influxdb",
             "uid": "influxdb"
           },
-          "query": "from(bucket: \"airparticle_monitoring\")\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r[\"_measurement\"] == \"air_particles\")\r\n  |> filter(fn: (r) => r[\"_field\"] == \"ambient_t\")\r\n  |> filter(fn: (r) => r[\"machine\"] == \"${machine}\")\r\n  |> last()",
+          "query": "from(bucket: \"${bucket}\")\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r[\"_measurement\"] == \"air_particles\")\r\n  |> filter(fn: (r) => r[\"_field\"] == \"ambient_t\")\r\n  |> filter(fn: (r) => r[\"machine\"] == \"${machine}\")\r\n  |> last()",
           "refId": "A"
         }
       ],
@@ -347,6 +353,7 @@
         "graphMode": "none",
         "justifyMode": "auto",
         "orientation": "auto",
+        "percentChangeColorMode": "standard",
         "reduceOptions": {
           "calcs": [
             "lastNotNull"
@@ -354,16 +361,18 @@
           "fields": "",
           "values": false
         },
-        "textMode": "auto"
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
       },
-      "pluginVersion": "9.4.7",
+      "pluginVersion": "11.1.3",
       "targets": [
         {
           "datasource": {
             "type": "influxdb",
             "uid": "influxdb"
           },
-          "query": "from(bucket: \"airparticle_monitoring\")\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r[\"_measurement\"] == \"air_particles\")\r\n  |> filter(fn: (r) => r[\"_field\"] == \"ambient_rh\")\r\n  |> filter(fn: (r) => r[\"machine\"] == \"${machine}\")\r\n  |> last()",
+          "query": "from(bucket: \"${bucket}\")\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r[\"_measurement\"] == \"air_particles\")\r\n  |> filter(fn: (r) => r[\"_field\"] == \"ambient_rh\")\r\n  |> filter(fn: (r) => r[\"machine\"] == \"${machine}\")\r\n  |> last()",
           "refId": "A"
         }
       ],
@@ -426,6 +435,7 @@
         "graphMode": "none",
         "justifyMode": "auto",
         "orientation": "auto",
+        "percentChangeColorMode": "standard",
         "reduceOptions": {
           "calcs": [
             "lastNotNull"
@@ -433,16 +443,18 @@
           "fields": "",
           "values": false
         },
-        "textMode": "auto"
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
       },
-      "pluginVersion": "9.4.7",
+      "pluginVersion": "11.1.3",
       "targets": [
         {
           "datasource": {
             "type": "influxdb",
             "uid": "influxdb"
           },
-          "query": "from(bucket: \"airparticle_monitoring\")\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r[\"_measurement\"] == \"air_particles\")\r\n  |> filter(fn: (r) => r[\"_field\"] == \"nox_index\")\r\n  |> filter(fn: (r) => r[\"machine\"] == \"${machine}\")\r\n  |> last()",
+          "query": "from(bucket: \"${bucket}\")\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r[\"_measurement\"] == \"air_particles\")\r\n  |> filter(fn: (r) => r[\"_field\"] == \"nox_index\")\r\n  |> filter(fn: (r) => r[\"machine\"] == \"${machine}\")\r\n  |> last()",
           "refId": "A"
         }
       ],
@@ -505,6 +517,7 @@
         "graphMode": "none",
         "justifyMode": "auto",
         "orientation": "auto",
+        "percentChangeColorMode": "standard",
         "reduceOptions": {
           "calcs": [
             "lastNotNull"
@@ -512,16 +525,18 @@
           "fields": "",
           "values": false
         },
-        "textMode": "auto"
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
       },
-      "pluginVersion": "9.4.7",
+      "pluginVersion": "11.1.3",
       "targets": [
         {
           "datasource": {
             "type": "influxdb",
             "uid": "influxdb"
           },
-          "query": "from(bucket: \"airparticle_monitoring\")\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r[\"_measurement\"] == \"air_particles\")\r\n  |> filter(fn: (r) => r[\"_field\"] == \"voc_index\")\r\n  |> filter(fn: (r) => r[\"machine\"] == \"${machine}\")\r\n  |> last()",
+          "query": "from(bucket: \"${bucket}\")\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r[\"_measurement\"] == \"air_particles\")\r\n  |> filter(fn: (r) => r[\"_field\"] == \"voc_index\")\r\n  |> filter(fn: (r) => r[\"machine\"] == \"${machine}\")\r\n  |> last()",
           "refId": "A"
         }
       ],
@@ -539,6 +554,7 @@
             "mode": "palette-classic"
           },
           "custom": {
+            "axisBorderShow": false,
             "axisCenteredZero": false,
             "axisColorMode": "text",
             "axisLabel": "",
@@ -552,6 +568,7 @@
               "tooltip": false,
               "viz": false
             },
+            "insertNulls": false,
             "lineInterpolation": "linear",
             "lineWidth": 1,
             "pointSize": 5,
@@ -690,7 +707,7 @@
             "uid": "influxdb"
           },
           "hide": false,
-          "query": "from(bucket: \"airparticle_monitoring\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"air_particles\")\n  |> filter(fn: (r) => r[\"_field\"] == \"mc_1p0\" or  r[\"_field\"] == \"mc_2p5\" or  r[\"_field\"] == \"mc_4p0\" or  r[\"_field\"] == \"mc_10p0\")\n  |> filter(fn: (r) => r[\"machine\"] == \"${machine}\")\n  |> aggregateWindow(every: v.windowPeriod, fn: last, createEmpty: true)\n  |> keep(columns: [\"_field\",\"_value\",\"_time\"])",
+          "query": "from(bucket: \"${bucket}\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"air_particles\")\n  |> filter(fn: (r) => r[\"_field\"] == \"mc_1p0\" or  r[\"_field\"] == \"mc_2p5\" or  r[\"_field\"] == \"mc_4p0\" or  r[\"_field\"] == \"mc_10p0\")\n  |> filter(fn: (r) => r[\"machine\"] == \"${machine}\")\n  |> aggregateWindow(every: v.windowPeriod, fn: last, createEmpty: true)\n  |> keep(columns: [\"_field\",\"_value\",\"_time\"])",
           "refId": "A"
         }
       ],
@@ -708,6 +725,7 @@
             "mode": "palette-classic"
           },
           "custom": {
+            "axisBorderShow": false,
             "axisCenteredZero": false,
             "axisColorMode": "text",
             "axisLabel": "",
@@ -721,6 +739,7 @@
               "tooltip": false,
               "viz": false
             },
+            "insertNulls": false,
             "lineInterpolation": "linear",
             "lineWidth": 1,
             "pointSize": 5,
@@ -738,8 +757,6 @@
             }
           },
           "mappings": [],
-          "max": 50,
-          "min": -10,
           "thresholds": {
             "mode": "absolute",
             "steps": [
@@ -783,7 +800,7 @@
             "uid": "influxdb"
           },
           "hide": false,
-          "query": "from(bucket: \"airparticle_monitoring\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"air_particles\")\n  |> filter(fn: (r) => r[\"_field\"] == \"ambient_t\")\n  |> filter(fn: (r) => r[\"machine\"] == \"${machine}\")\n  |> aggregateWindow(every: v.windowPeriod, fn: last, createEmpty: true)\n  |> yield(name: \"last\")",
+          "query": "from(bucket: \"${bucket}\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"air_particles\")\n  |> filter(fn: (r) => r[\"_field\"] == \"ambient_t\")\n  |> filter(fn: (r) => r[\"machine\"] == \"${machine}\")\n  |> aggregateWindow(every: v.windowPeriod, fn: last, createEmpty: true)\n  |> yield(name: \"last\")",
           "refId": "A"
         }
       ],
@@ -813,6 +830,7 @@
             "mode": "palette-classic"
           },
           "custom": {
+            "axisBorderShow": false,
             "axisCenteredZero": false,
             "axisColorMode": "text",
             "axisLabel": "",
@@ -826,6 +844,7 @@
               "tooltip": false,
               "viz": false
             },
+            "insertNulls": false,
             "lineInterpolation": "linear",
             "lineWidth": 1,
             "pointSize": 5,
@@ -843,8 +862,6 @@
             }
           },
           "mappings": [],
-          "max": 90,
-          "min": 0,
           "thresholds": {
             "mode": "absolute",
             "steps": [
@@ -888,7 +905,7 @@
             "uid": "influxdb"
           },
           "hide": false,
-          "query": "from(bucket: \"airparticle_monitoring\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"air_particles\")\n  |> filter(fn: (r) => r[\"_field\"] == \"ambient_rh\")\n  |> filter(fn: (r) => r[\"machine\"] == \"${machine}\")\n  |> aggregateWindow(every: v.windowPeriod, fn: last, createEmpty: true)\n  |> yield(name: \"last\")",
+          "query": "from(bucket: \"${bucket}\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"air_particles\")\n  |> filter(fn: (r) => r[\"_field\"] == \"ambient_rh\")\n  |> filter(fn: (r) => r[\"machine\"] == \"${machine}\")\n  |> aggregateWindow(every: v.windowPeriod, fn: last, createEmpty: true)\n  |> yield(name: \"last\")",
           "refId": "A"
         }
       ],
@@ -919,6 +936,7 @@
             "mode": "palette-classic"
           },
           "custom": {
+            "axisBorderShow": false,
             "axisCenteredZero": false,
             "axisColorMode": "text",
             "axisLabel": "",
@@ -932,6 +950,7 @@
               "tooltip": false,
               "viz": false
             },
+            "insertNulls": false,
             "lineInterpolation": "linear",
             "lineWidth": 1,
             "pointSize": 5,
@@ -1015,44 +1034,50 @@
             "uid": "influxdb"
           },
           "hide": false,
-          "query": "from(bucket: \"airparticle_monitoring\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"air_particles\")\n  |> filter(fn: (r) => r[\"_field\"] == \"voc_index\" or r[\"_field\"] == \"nox_index\")\n  |> filter(fn: (r) => r[\"machine\"] == \"${machine}\")\n  |> aggregateWindow(every: v.windowPeriod, fn: last, createEmpty: true)\n  |> keep(columns: [\"_field\",\"_value\",\"_time\"])\n  ",
+          "query": "from(bucket: \"${bucket}\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"air_particles\")\n  |> filter(fn: (r) => r[\"_field\"] == \"voc_index\" or r[\"_field\"] == \"nox_index\")\n  |> filter(fn: (r) => r[\"machine\"] == \"${machine}\")\n  |> aggregateWindow(every: v.windowPeriod, fn: last, createEmpty: true)\n  |> keep(columns: [\"_field\",\"_value\",\"_time\"])\n  ",
           "refId": "A"
         }
       ],
       "title": "VOC and NOX Index History",
-      "transformations": [],
       "type": "timeseries"
     }
   ],
   "refresh": "5s",
   "revision": 1,
-  "schemaVersion": 38,
-  "style": "dark",
+  "schemaVersion": 39,
   "tags": [],
   "templating": {
     "list": [
       {
         "current": {
-          "selected": true,
-          "text": "Machine_1",
-          "value": "Machine_1"
+          "selected": false,
+          "text": "machine_name_here",
+          "value": "machine_name_here"
         },
         "datasource": {
           "type": "influxdb",
           "uid": "influxdb"
         },
-        "definition": "from(bucket: \"airparticle_monitoring\")\r\n  |> range(start: -7d)\r\n  |> filter(fn: (r) => r[\"_measurement\"] == \"air_particles\")\r\n  |> keep(columns: [\"machine\"])\r\n  |> distinct(column: \"machine\")\r\n  |> filter(fn: (r) => r[\"machine\"] != \"null\")\r\n  |> group()",
+        "definition": "from(bucket: \"air_particle_monitoring\")\r\n  |> range(start: -7d)\r\n  |> filter(fn: (r) => r[\"_measurement\"] == \"air_particles\")\r\n  |> keep(columns: [\"machine\"])\r\n  |> distinct(column: \"machine\")\r\n  |> filter(fn: (r) => r[\"machine\"] != \"null\")\r\n  |> group()",
         "hide": 0,
         "includeAll": false,
         "multi": false,
         "name": "machine",
         "options": [],
-        "query": "from(bucket: \"airparticle_monitoring\")\r\n  |> range(start: -7d)\r\n  |> filter(fn: (r) => r[\"_measurement\"] == \"air_particles\")\r\n  |> keep(columns: [\"machine\"])\r\n  |> distinct(column: \"machine\")\r\n  |> filter(fn: (r) => r[\"machine\"] != \"null\")\r\n  |> group()",
+        "query": "from(bucket: \"air_particle_monitoring\")\r\n  |> range(start: -7d)\r\n  |> filter(fn: (r) => r[\"_measurement\"] == \"air_particles\")\r\n  |> keep(columns: [\"machine\"])\r\n  |> distinct(column: \"machine\")\r\n  |> filter(fn: (r) => r[\"machine\"] != \"null\")\r\n  |> group()",
         "refresh": 1,
         "regex": "",
         "skipUrlSync": false,
         "sort": 0,
         "type": "query"
+      },
+      {
+        "description": "InfluxDB data bucket for sourcing data for all panels",
+        "hide": 2,
+        "name": "bucket",
+        "query": "air_particle_monitoring",
+        "skipUrlSync": false,
+        "type": "constant"
       }
     ]
   },
@@ -1064,6 +1089,6 @@
   "timezone": "",
   "title": "Air Particle Dashboard",
   "uid": "q39y6tRgk1",
-  "version": 4,
+  "version": 3,
   "weekStart": ""
 }
