@@ -4,6 +4,7 @@
 [adc]
     # uncomment the adc that you are using
     adc_module = "sen5x"
+    addon_module="sen0231"
 
 [sampling]
     sample_interval = 1
@@ -25,3 +26,4 @@
     reconnect.initial = 5 # seconds
     reconnect.backoff = 2 # multiplier
     reconnect.limit = 60 # seconds
+

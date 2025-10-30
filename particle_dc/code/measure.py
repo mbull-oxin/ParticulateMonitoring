@@ -140,7 +140,7 @@ class AirParticleMeasureBuildingBlock(multiprocessing.Process):
             
             # get the addon data if it exists....
             if addon:
-                results.extend(addon.sample)
+                results.update(addon.sample())
 
             # send
             payload = {**results, **self.constants, "timestamp": timestamp}
