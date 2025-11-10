@@ -22,3 +22,5 @@ Continue accepting the prompts to build and start now
 - documentation for gravity HCHO Sensor
 https://wiki.dfrobot.com/Gravity__HCHO_Sensor_SKU__SEN0231#More
 
+### Changes
+- this repo has changes for implementation of addon sensors alongside the particulate monitors, these can only add a single extra reading and utilize the new add_type, add_unit and add_reading keys in the MQTT packet.
