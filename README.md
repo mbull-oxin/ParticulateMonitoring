@@ -1,18 +1,15 @@
 # Air Particle Monitoring Starter Solution
 
-## Install the Shoestring App
-In the terminal, run:
-- `sudo apt instll pipx -y`
-- `sudo pipx run shoestring-setup`
-- `sudo reboot` if prompted to restart
+### Download
+- Clone this repo `git clone https://github.com/DigitalShoestringSolutions/AirParticleMonitoring`
+- Open the downloaded folder `cd AirParticleMonitoring`
 
-## Use the Shoestring App to download and configure this Solution
-- In the terminal run `shoestring app`, or double click the desktop icon called `Shoestring`.  
-- Use the `Download` button to select the name of this solution. Select the latest release tag.  
-- Follow the prompts to configure
+### Configure
+- Set the machine name `nano particle_dc/config/config.toml`
 
-## Build & Start
-Continue accepting the prompts to build and start now
+### Build & Run
+- Build the docker containers `docker compose build`
+- Start the docker containers `./start.sh`
 
 ### Usage
 - View the dashboard: navigate to `localhost:3000` in a web browser
