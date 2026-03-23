@@ -1,7 +1,7 @@
 # Air Particle Monitoring Starter Solution
 
 ### Download
-- Clone this repo `https://github.com/mbull-oxin/ParticulateMonitoring.git`
+- Clone this repo `git clone https://github.com/mbull-oxin/ParticulateMonitoring.git`
 
 ### Install Docker
 - Install docker `curl -sSL https://get.docker.com | sh`
@@ -9,10 +9,10 @@
 - Set docker to run on startup `sudo systemctl enable docker`
 
 ### Setup I2c
-- Launch raspi-config `raspi-config`
+- Launch raspi-config `sudo raspi-config`
 - Navigate to - Interface Options -> I2C -> <YES>
 - then <FINISH> to exit
-- Reboot the pi for changes to take effect `sudo reboot`
+- select yes to reboot
 
 ### Setup Logging
 - Download logging files `git clone https://github.com/DigitalShoestringSolutions/SetupLogging -b v1.1.2 ~/SetupLogging`
