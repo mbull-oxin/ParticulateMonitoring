@@ -1,10 +1,25 @@
 # Air Particle Monitoring Starter Solution
 
 ### Download
-- Clone this repo `git clone https://github.com/DigitalShoestringSolutions/AirParticleMonitoring`
-- Open the downloaded folder `cd AirParticleMonitoring`
+- Clone this repo `https://github.com/mbull-oxin/ParticulateMonitoring.git`
+
+### Install Docker
+- Install docker `curl -sSL https://get.docker.com | sh`
+- Add user to the docker group `sudo usermod -a -G docker $USER`
+- Set docker to run on startup `sudo systemctl enable docker`
+
+### Setup I2c
+- Launch raspi-config `raspi-config`
+- Navigate to - Interface Options -> I2C -> <YES>
+- then <FINISH> to exit
+- Reboot the pi for changes to take effect `sudo reboot`
+
+### Setup Logging
+- Download logging files `git clone https://github.com/DigitalShoestringSolutions/SetupLogging -b v1.1.2 ~/SetupLogging`
+- run script to setup logging `~/SetupLogging/setup_logging.sh`
 
 ### Configure
+- Change to the downloaded folder from earlier `cd ParticulateMonitoring` 
 - Set the machine name `nano particle_dc/config/config.toml`
 
 ### Build & Run
